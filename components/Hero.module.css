@@ -1,0 +1,200 @@
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 120px 40px 80px;
+}
+
+.gridBg {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  animation: gridDrift 14s linear infinite;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 45%, black 30%, transparent 75%);
+}
+
+@keyframes gridDrift {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 64px 64px, 64px 64px;
+  }
+}
+
+.corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  opacity: 0.7;
+}
+
+.cornerTl {
+  top: 96px;
+  left: 40px;
+  border-top: 2px solid var(--ac, #ff4d5a);
+  border-left: 2px solid var(--ac, #ff4d5a);
+}
+
+.cornerTr {
+  top: 96px;
+  right: 40px;
+  border-top: 2px solid var(--ac, #ff4d5a);
+  border-right: 2px solid var(--ac, #ff4d5a);
+}
+
+.cornerBl {
+  bottom: 40px;
+  left: 40px;
+  border-bottom: 2px solid var(--ac, #ff4d5a);
+  border-left: 2px solid var(--ac, #ff4d5a);
+}
+
+.cornerBr {
+  bottom: 40px;
+  right: 40px;
+  border-bottom: 2px solid var(--ac, #ff4d5a);
+  border-right: 2px solid var(--ac, #ff4d5a);
+}
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--ac, #ff4d5a);
+  letter-spacing: 0.14em;
+  animation: fadeUp 0.7s ease-out both;
+}
+
+.badgeLine {
+  width: 32px;
+  height: 1px;
+  background: var(--ac, #ff4d5a);
+  display: inline-block;
+}
+
+.heading {
+  font-size: clamp(56px, 9vw, 118px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  margin: 26px 0 20px;
+  color: #f2f0ed;
+  animation: fadeUp 0.7s ease-out 0.12s both;
+}
+
+.headingOutline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(242, 240, 237, 0.55);
+}
+
+.typedLine {
+  font-size: clamp(15px, 2vw, 20px);
+  color: #8a8a93;
+  min-height: 1.6em;
+  animation: fadeUp 0.7s ease-out 0.24s both;
+}
+
+.prompt {
+  color: #55555e;
+}
+
+.cursorBlink {
+  display: inline-block;
+  width: 9px;
+  height: 1.1em;
+  background: var(--ac, #ff4d5a);
+  vertical-align: text-bottom;
+  animation: blinkCursor 1s step-end infinite;
+}
+
+@keyframes blinkCursor {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.lead {
+  max-width: 560px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #a5a5ad;
+  margin: 28px 0 40px;
+  animation: fadeUp 0.7s ease-out 0.36s both;
+  text-wrap: pretty;
+}
+
+.ctaRow {
+  display: flex;
+  gap: 16px;
+  animation: fadeUp 0.7s ease-out 0.48s both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btnPrimary {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: #0a0a0e;
+  background: var(--ac, #ff4d5a);
+  padding: 15px 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255, 77, 90, 0.35);
+}
+
+.btnSecondary {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: #e8e6e3;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 15px 30px;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.btnSecondary:hover {
+  border-color: var(--ac, #ff4d5a);
+  background: rgba(255, 77, 90, 0.06);
+}
+
+.scrollHint {
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: #55555e;
+  letter-spacing: 0.2em;
+}

@@ -1,0 +1,152 @@
+.section {
+  padding: 110px 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.eyebrow {
+  font-size: 13px;
+  color: var(--ac, #ff4d5a);
+  letter-spacing: 0.14em;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.photoWrap {
+  margin-top: 36px;
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.photoRing {
+  position: absolute;
+  inset: 0;
+  border: 1px dashed rgba(255, 77, 90, 0.4);
+  border-radius: 50%;
+  animation: ringSpin 24s linear infinite;
+}
+
+@keyframes ringSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.photoInner {
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+}
+
+.photoLabel {
+  font-size: 10px;
+  color: #55555e;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.paraLarge {
+  font-size: 18px;
+  line-height: 1.75;
+  color: #c9c7c4;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.paraSmall {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #8a8a93;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.availableWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.availableLabel {
+  font-size: 11px;
+  color: #55555e;
+  letter-spacing: 0.12em;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-size: 12px;
+  color: #a5a5ad;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 10px;
+}
+
+.stat {
+  background: #0d0d12;
+  padding: 22px 20px;
+}
+
+.statValue {
+  font-size: 32px;
+  font-weight: 700;
+  color: #f2f0ed;
+}
+
+.statLabel {
+  font-size: 11px;
+  color: #8a8a93;
+  letter-spacing: 0.08em;
+  margin-top: 6px;
+}

@@ -1,0 +1,82 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 40px;
+  background: rgba(10, 10, 14, 0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.logo {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e8e6e3;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.navLink {
+  font-size: 12px;
+  color: #8a8a93;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  color: #e8e6e3;
+}
+
+.contactLink {
+  font-size: 12px;
+  color: var(--ac, #ff4d5a);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(255, 77, 90, 0.4);
+  padding: 7px 16px;
+  transition: background 0.2s ease;
+}
+
+.contactLink:hover {
+  background: rgba(255, 77, 90, 0.12);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: #8a8a93;
+  letter-spacing: 0.08em;
+}
+
+.pulseDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #39ff8a;
+  display: inline-block;
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
