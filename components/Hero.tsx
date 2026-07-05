@@ -1,4 +1,5 @@
 import TypingText from "./TypingText";
+import ScrollIndicator from "./ScrollIndicator";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
@@ -41,7 +42,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className={`${styles.scrollHint} mono`}>SCROLL ▾</div>
+      <ScrollIndicator />
     </section>
   );
 }

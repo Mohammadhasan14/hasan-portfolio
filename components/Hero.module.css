@@ -197,6 +197,61 @@
   font-size: 11px;
   color: #55555e;
   letter-spacing: 0.2em;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.scrollHint[data-hidden="true"] {
+  opacity: 0;
+  transform: translate(-50%, 14px);
+  pointer-events: none;
+}
+
+.scrollLabel {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  animation: scrollPulse 2.6s ease-in-out infinite;
+}
+
+.scrollArrow {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  color: var(--ac, #ff4d5a);
+  animation: scrollArrowBounce 1.6s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes scrollArrowBounce {
+  0%,
+  100% {
+    transform: translateY(-2px);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(3px);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollLabel,
+  .scrollArrow {
+    animation: none;
+  }
 }
 
 @media (max-width: 760px) {
