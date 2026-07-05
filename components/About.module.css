@@ -56,23 +56,12 @@
   inset: 18px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.03) 0px,
-    rgba(255, 255, 255, 0.03) 6px,
-    transparent 6px,
-    transparent 12px
-  );
+  overflow: hidden;
+  background: #0d0d12;
 }
 
-.photoLabel {
-  font-size: 10px;
-  color: #55555e;
-  letter-spacing: 0.1em;
-  text-align: center;
+.photoImg {
+  object-fit: cover;
 }
 
 .copy {

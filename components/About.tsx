@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Reveal from "./Reveal";
 import styles from "./About.module.css";
 
@@ -25,7 +26,14 @@ export default function About() {
           <div className={styles.photoWrap}>
             <div className={styles.photoRing} />
             <div className={styles.photoInner}>
-              <span className={`${styles.photoLabel} mono`}>[ your photo ]</span>
+              <Image
+                src="/images/hasan_profile.png"
+                alt="Mohammad Hasan Abbas"
+                fill
+                sizes="164px"
+                className={styles.photoImg}
+                priority
+              />
             </div>
           </div>
         </Reveal>
