@@ -95,3 +95,32 @@
 .social:hover {
   color: var(--ac, #ff4d5a);
 }
+
+@media (max-width: 760px) {
+  .section {
+    padding: 100px 24px 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 80px 18px 60px;
+  }
+
+  .emailBtn {
+    padding: 16px 24px;
+    font-size: 13px;
+    max-width: 100%;
+    word-break: break-word;
+  }
+
+  .infoRow {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .socialRow {
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+}

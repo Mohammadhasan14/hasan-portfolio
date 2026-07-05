@@ -167,3 +167,31 @@
   color: #55555e;
   letter-spacing: 0.08em;
 }
+
+@media (max-width: 900px) {
+  .section {
+    padding: 90px 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 70px 18px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .body {
+    padding: 20px;
+  }
+
+  .moreCard {
+    min-height: 200px;
+  }
+}

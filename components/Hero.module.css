@@ -198,3 +198,61 @@
   color: #55555e;
   letter-spacing: 0.2em;
 }
+
+@media (max-width: 760px) {
+  .hero {
+    padding: 110px 24px 70px;
+  }
+
+  .cornerTl,
+  .cornerTr {
+    top: 76px;
+  }
+
+  .cornerBl,
+  .cornerBr {
+    bottom: 24px;
+  }
+
+  .cornerTl,
+  .cornerBl {
+    left: 24px;
+  }
+
+  .cornerTr,
+  .cornerBr {
+    right: 24px;
+  }
+
+  .ctaRow {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 100px 18px 60px;
+  }
+
+  .corner {
+    width: 18px;
+    height: 18px;
+  }
+
+  .badge {
+    font-size: 11px;
+  }
+
+  .lead {
+    font-size: 15px;
+  }
+
+  .ctaRow {
+    flex-direction: column;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    text-align: center;
+  }
+}

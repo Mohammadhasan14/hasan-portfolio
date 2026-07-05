@@ -80,3 +80,32 @@
   margin: 12px 0 0;
   text-wrap: pretty;
 }
+
+@media (max-width: 900px) {
+  .section {
+    padding: 90px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 70px 18px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .timeline {
+    padding-left: 22px;
+    gap: 36px;
+  }
+
+  .dot {
+    left: -27px;
+  }
+
+  .role {
+    font-size: 20px;
+  }
+}

@@ -27,7 +27,7 @@ export default function Hero() {
         </div>
         <p className={styles.lead}>
           I design and build scalable SaaS, eCommerce, and real-time systems on the MERN
-          stack — 14+ production apps shipped over 5+ years, including Shopify public
+          stack — 14+ production apps shipped over 4+ years, including Shopify public
           apps and Play Store releases. Available for custom builds. Based in Nagpur,
           India.
         </p>

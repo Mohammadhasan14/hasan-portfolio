@@ -150,3 +150,33 @@
   letter-spacing: 0.08em;
   margin-top: 6px;
 }
+
+@media (max-width: 900px) {
+  .section {
+    padding: 90px 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 70px 18px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .photoWrap {
+    width: 160px;
+    height: 160px;
+  }
+
+  .statGrid {
+    grid-template-columns: 1fr;
+  }
+}

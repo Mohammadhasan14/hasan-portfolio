@@ -10,7 +10,7 @@ const availableFor = [
 ];
 
 const stats = [
-  { value: "5+", label: "YEARS SHIPPING" },
+  { value: "4+", label: "YEARS SHIPPING" },
   { value: "14+", label: "PRODUCTION APPS" },
   { value: "8.96", label: "GPA — B.E. CS" },
 ];
@@ -31,7 +31,7 @@ export default function About() {
         </Reveal>
         <Reveal className={styles.copy}>
           <p className={styles.paraLarge}>
-            Full Stack Developer with 5+ years of experience designing and building
+            Full Stack Developer with 4+ years of experience designing and building
             scalable SaaS, eCommerce, and real-time systems on the MERN stack. I&apos;ve
             delivered 14+ production applications — including Shopify public apps,
             learning platforms, and Play Store mobile solutions — with a focus on clean

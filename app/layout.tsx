@@ -17,7 +17,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "Mohammad Hasan Abbas — Full Stack Developer",
   description:
-    "Full Stack Developer with 5+ years of experience designing and building scalable SaaS, eCommerce, and real-time systems on the MERN stack.",
+    "Full Stack Developer with 4+ years of experience designing and building scalable SaaS, eCommerce, and real-time systems on the MERN stack.",
 };
 
 export default function RootLayout({

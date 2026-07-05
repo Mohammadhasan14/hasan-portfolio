@@ -1,4 +1,5 @@
 import Clock from "./Clock";
+import MobileNav from "./MobileNav";
 import styles from "./Nav.module.css";
 
 export default function Nav() {
@@ -28,6 +29,7 @@ export default function Nav() {
         <span className={styles.pulseDot} />
         <Clock />
       </div>
+      <MobileNav />
     </nav>
   );
 }
