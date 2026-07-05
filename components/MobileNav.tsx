@@ -4,10 +4,10 @@ import { useState } from "react";
 import styles from "./Nav.module.css";
 
 const navLinks = [
-  { href: "#about", label: "01.ABOUT" },
-  { href: "#skills", label: "02.STACK" },
-  { href: "#experience", label: "03.LOG" },
-  { href: "#projects", label: "04.WORK" },
+  { href: "#about", label: "ABOUT" },
+  { href: "#skills", label: "STACK" },
+  { href: "#experience", label: "LOG" },
+  { href: "#projects", label: "WORK" },
 ];
 
 export default function MobileNav() {
@@ -41,7 +41,7 @@ export default function MobileNav() {
             className={`${styles.contactLink} mono`}
             onClick={() => setOpen(false)}
           >
-            05.CONTACT
+            CONTACT
           </a>
         </div>
       )}

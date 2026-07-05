@@ -10,19 +10,19 @@ export default function Nav() {
       </a>
       <div className={styles.links}>
         <a href="#about" className={`${styles.navLink} mono`}>
-          01.ABOUT
+          ABOUT
         </a>
         <a href="#skills" className={`${styles.navLink} mono`}>
-          02.STACK
+          STACK
         </a>
         <a href="#experience" className={`${styles.navLink} mono`}>
-          03.LOG
+          LOG
         </a>
         <a href="#projects" className={`${styles.navLink} mono`}>
-          04.WORK
+          WORK
         </a>
         <a href="#contact" className={`${styles.contactLink} mono`}>
-          05.CONTACT
+          CONTACT
         </a>
       </div>
       <div className={`${styles.status} mono`}>
