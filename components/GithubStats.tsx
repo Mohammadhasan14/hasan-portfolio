@@ -9,7 +9,7 @@ export default function GithubStats() {
         <Reveal className={styles.header}>
           <div>
             <div className={`${styles.eyebrow} mono`}>05 / OPEN SOURCE</div>
-            <h2 className={styles.title}>Public activity</h2>
+            <h2 className={styles.title}>Contributions</h2>
           </div>
           <a
             href="https://github.com/Mohammadhasan14"

@@ -7,7 +7,7 @@ export default function Contact() {
       <div className={styles.gridBg} />
       <Reveal className={styles.inner}>
         <div className={`${styles.eyebrow} mono`}>06 / CONTACT</div>
-        <h2 className={styles.title}>Open a channel</h2>
+        <h2 className={styles.title}>Let&apos;s connect</h2>
         <p className={styles.lead}>
           Have a project, a role, or just want to talk shop? My inbox is always open.
         </p>

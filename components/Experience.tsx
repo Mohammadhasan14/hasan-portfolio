@@ -8,7 +8,7 @@ export default function Experience() {
       <div className={styles.inner}>
         <Reveal>
           <div className={`${styles.eyebrow} mono`}>03 / LOG</div>
-          <h2 className={styles.title}>Mission history</h2>
+          <h2 className={styles.title}>Career timeline</h2>
         </Reveal>
         <div className={styles.timeline}>
           {jobs.map((job) => (

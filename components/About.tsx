@@ -11,7 +11,7 @@ const availableFor = [
 ];
 
 const stats = [
-  { value: "4+", label: "YEARS SHIPPING" },
+  { value: "4+", label: "YEARS EXPERIENCE" },
   { value: "14+", label: "PRODUCTION APPS" },
   { value: "8.96", label: "GPA — B.E. CS" },
 ];
@@ -22,7 +22,7 @@ export default function About() {
       <div className={styles.grid}>
         <Reveal>
           <div className={`${styles.eyebrow} mono`}>01 / ABOUT</div>
-          <h2 className={styles.title}>Operator profile</h2>
+          <h2 className={styles.title}>Developer profile</h2>
           <div className={styles.photoWrap}>
             <div className={styles.photoRing} />
             <div className={styles.photoInner}>

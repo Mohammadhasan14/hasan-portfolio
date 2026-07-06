@@ -8,7 +8,7 @@ export default function Skills() {
       <div className={styles.inner}>
         <Reveal>
           <div className={`${styles.eyebrow} mono`}>02 / STACK</div>
-          <h2 className={styles.title}>Loaded modules</h2>
+          <h2 className={styles.title}>Tech stack</h2>
         </Reveal>
         <div className={styles.grid}>
           {skillGroups.map((grp) => (

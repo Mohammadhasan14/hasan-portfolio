@@ -8,7 +8,7 @@ export default function Projects() {
       <div className={styles.inner}>
         <Reveal>
           <div className={`${styles.eyebrow} mono`}>04 / WORK</div>
-          <h2 className={styles.title}>Deployed builds</h2>
+          <h2 className={styles.title}>Featured projects</h2>
         </Reveal>
         <div className={styles.grid}>
           {projects.map((proj) => (
