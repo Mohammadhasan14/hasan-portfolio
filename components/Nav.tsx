@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import Clock from "./Clock";
 import MobileNav from "./MobileNav";
 import styles from "./Nav.module.css";
 
 const SECTIONS = [
+  { id: "hero", label: "HOME" },
   { id: "about", label: "ABOUT" },
   { id: "skills", label: "STACK" },
   { id: "experience", label: "LOG" },
@@ -14,10 +15,7 @@ const SECTIONS = [
 ];
 
 export default function Nav() {
-  const [active, setActive] = useState<string | null>(null);
-  const [hidden, setHidden] = useState(false);
-  const lastY = useRef(0);
-  const ticking = useRef(false);
+  const [active, setActive] = useState<string | null>("hero");
 
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
@@ -26,35 +24,33 @@ export default function Nav() {
     );
     if (!sections.length) return;
 
+    const ratios = new Map<string, number>();
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
+          ratios.set(entry.target.id, entry.isIntersecting ? entry.intersectionRatio : 0);
         });
+
+        let bestId: string | null = null;
+        let bestRatio = 0;
+        ratios.forEach((ratio, id) => {
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestId = id;
+          }
+        });
+
+        if (bestId) setActive(bestId);
       },
-      { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
+      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
     );
     sections.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
 
-  useEffect(() => {
-    const onScroll = () => {
-      if (ticking.current) return;
-      ticking.current = true;
-      requestAnimationFrame(() => {
-        const y = window.scrollY;
-        setHidden(y > lastY.current && y > 140);
-        lastY.current = y;
-        ticking.current = false;
-      });
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <nav className={styles.nav} data-hidden={hidden}>
+    <nav className={styles.nav}>
       <a href="#hero" className={`${styles.logo} mono`}>
         MH<span style={{ color: "var(--ac, #ff4d5a)" }}>://</span>dev
       </a>

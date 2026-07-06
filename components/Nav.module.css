@@ -11,11 +11,6 @@
   background: rgba(10, 10, 14, 0.82);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  transition: top 0.35s ease;
-}
-
-.nav[data-hidden="true"] {
-  top: -96px;
 }
 
 .logo {

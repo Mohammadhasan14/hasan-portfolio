@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./Nav.module.css";
 
 const navLinks = [
+  { href: "#hero", label: "HOME" },
   { href: "#about", label: "ABOUT" },
   { href: "#skills", label: "STACK" },
   { href: "#experience", label: "LOG" },
