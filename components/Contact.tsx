@@ -1,7 +1,29 @@
+"use client";
+
+import { useState } from "react";
+import type { MouseEvent } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { Mail, Phone, MapPin, GitFork, Briefcase, FileDown, Check } from "lucide-react";
 import Reveal from "./Reveal";
 import styles from "./Contact.module.css";
 
+const EMAIL = "mohdhasan7867214@gmail.com";
+
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = async (e: MouseEvent<HTMLAnchorElement>) => {
+    if (!navigator.clipboard) return;
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
+    } catch {
+      window.location.href = `mailto:${EMAIL}`;
+    }
+  };
+
   return (
     <section id="contact" className={styles.section}>
       <div className={styles.gridBg} />
@@ -11,13 +33,20 @@ export default function Contact() {
         <p className={styles.lead}>
           Have a project, a role, or just want to talk shop? My inbox is always open.
         </p>
-        <a href="mailto:mohdhasan7867214@gmail.com" className={`${styles.emailBtn} mono`}>
-          mohdhasan7867214@gmail.com
+        <a href={`mailto:${EMAIL}`} onClick={handleCopyEmail} className={`${styles.emailBtn} mono`}>
+          <Mail size={16} strokeWidth={2.25} />
+          {EMAIL}
         </a>
         <div className={`${styles.infoRow} mono`}>
-          <span>+91 72180 74913</span>
+          <span className={styles.infoItem}>
+            <Phone size={13} strokeWidth={2.25} />
+            +91 72180 74913
+          </span>
           <span className={styles.sep}>/</span>
-          <span>NAGPUR, INDIA</span>
+          <span className={styles.infoItem}>
+            <MapPin size={13} strokeWidth={2.25} />
+            NAGPUR, INDIA
+          </span>
         </div>
         <div className={styles.socialRow}>
           <a
@@ -26,6 +55,7 @@ export default function Contact() {
             rel="noopener"
             className={`${styles.social} mono`}
           >
+            <GitFork size={15} strokeWidth={2.25} />
             GITHUB
           </a>
           <a
@@ -34,13 +64,32 @@ export default function Contact() {
             rel="noopener"
             className={`${styles.social} mono`}
           >
+            <Briefcase size={15} strokeWidth={2.25} />
             LINKEDIN
           </a>
           <a href="/resume.pdf" target="_blank" className={`${styles.social} mono`}>
+            <FileDown size={15} strokeWidth={2.25} />
             RESUME.PDF
           </a>
         </div>
       </Reveal>
+
+      <div className={styles.toastWrap}>
+        <AnimatePresence>
+          {copied && (
+            <motion.div
+              className={`${styles.toast} mono`}
+              initial={{ opacity: 0, y: 16, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Check size={14} strokeWidth={2.5} />
+              Email copied to clipboard
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </section>
   );
 }

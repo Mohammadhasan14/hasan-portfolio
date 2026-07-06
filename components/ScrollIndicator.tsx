@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import styles from "./Hero.module.css";
 
 export default function ScrollIndicator() {
@@ -25,7 +26,7 @@ export default function ScrollIndicator() {
   return (
     <div className={`${styles.scrollHint} mono`} data-hidden={hidden}>
       <span className={styles.scrollLabel}>SCROLL</span>
-      <span className={styles.scrollArrow}>▾</span>
+      <ChevronDown className={styles.scrollArrow} size={13} strokeWidth={2.5} />
     </div>
   );
 }

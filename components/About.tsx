@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Reveal from "./Reveal";
+import AnimatedNumber from "./AnimatedNumber";
 import styles from "./About.module.css";
 
 const availableFor = [
@@ -20,7 +21,7 @@ export default function About() {
   return (
     <section id="about" className={styles.section}>
       <div className={styles.grid}>
-        <Reveal>
+        <Reveal effect="slide-right">
           <div className={`${styles.eyebrow} mono`}>01 / ABOUT</div>
           <h2 className={styles.title}>Developer profile</h2>
           <div className={styles.photoWrap}>
@@ -37,7 +38,7 @@ export default function About() {
             </div>
           </div>
         </Reveal>
-        <Reveal className={styles.copy}>
+        <Reveal className={styles.copy} effect="slide-left" delay={0.1}>
           <p className={styles.paraLarge}>
             Full Stack Developer with 4+ years of experience designing and building
             scalable SaaS, eCommerce, and real-time systems on the MERN stack. I&apos;ve
@@ -63,7 +64,7 @@ export default function About() {
           <div className={styles.statGrid}>
             {stats.map((stat) => (
               <div key={stat.label} className={styles.stat}>
-                <div className={styles.statValue}>{stat.value}</div>
+                <AnimatedNumber value={stat.value} className={styles.statValue} />
                 <div className={`${styles.statLabel} mono`}>{stat.label}</div>
               </div>
             ))}

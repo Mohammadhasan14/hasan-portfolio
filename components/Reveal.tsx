@@ -1,46 +1,78 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { motion, useReducedMotion, type Variants } from "motion/react";
 import type { ComponentPropsWithoutRef, ElementType } from "react";
 
-type RevealProps<T extends ElementType> = {
+export type RevealEffect =
+  | "fade-up"
+  | "fade"
+  | "slide-left"
+  | "slide-right"
+  | "scale"
+  | "blur";
+
+const EFFECTS: Record<RevealEffect, Variants> = {
+  "fade-up": {
+    hidden: { opacity: 0, y: 26 },
+    visible: { opacity: 1, y: 0 },
+  },
+  fade: {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  },
+  "slide-left": {
+    hidden: { opacity: 0, x: 48 },
+    visible: { opacity: 1, x: 0 },
+  },
+  "slide-right": {
+    hidden: { opacity: 0, x: -48 },
+    visible: { opacity: 1, x: 0 },
+  },
+  scale: {
+    hidden: { opacity: 0, scale: 0.92 },
+    visible: { opacity: 1, scale: 1 },
+  },
+  blur: {
+    hidden: { opacity: 0, filter: "blur(12px)", y: 16 },
+    visible: { opacity: 1, filter: "blur(0px)", y: 0 },
+  },
+};
+
+type RevealOwnProps = {
+  effect?: RevealEffect;
+  delay?: number;
+  duration?: number;
+};
+
+type RevealProps<T extends ElementType> = RevealOwnProps & {
   as?: T;
-} & Omit<ComponentPropsWithoutRef<T>, "as">;
+} & Omit<ComponentPropsWithoutRef<T>, "as" | keyof RevealOwnProps>;
 
 export default function Reveal<T extends ElementType = "div">({
   as,
+  effect = "fade-up",
+  delay = 0,
+  duration = 0.7,
   ...props
 }: RevealProps<T>) {
-  const Component = (as ?? "div") as ElementType;
-  const ref = useRef<HTMLElement | null>(null);
+  const reduceMotion = useReducedMotion();
+  const tag = as ?? "div";
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || typeof IntersectionObserver === "undefined") return;
+  if (reduceMotion) {
+    const Static = tag as ElementType;
+    return <Static {...(props as Record<string, unknown>)} />;
+  }
 
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.9) return;
+  const MotionTag = tag === "a" ? motion.a : motion.div;
 
-    el.style.opacity = "0";
-    el.style.transform = "translateY(26px)";
-    el.style.transition = "opacity 0.7s ease-out, transform 0.7s ease-out";
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            el.style.opacity = "1";
-            el.style.transform = "translateY(0)";
-            io.unobserve(el);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-    io.observe(el);
-
-    return () => io.disconnect();
-  }, []);
-
-  return <Component ref={ref} {...props} />;
+  return (
+    <MotionTag
+      variants={EFFECTS[effect]}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration, delay, ease: [0.16, 1, 0.3, 1] }}
+      {...(props as Record<string, unknown>)}
+    />
+  );
 }

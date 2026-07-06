@@ -1,4 +1,6 @@
+import { ExternalLink } from "lucide-react";
 import Reveal from "./Reveal";
+import AnimatedNumber from "./AnimatedNumber";
 import { ghStats } from "@/lib/data";
 import styles from "./GithubStats.module.css";
 
@@ -17,17 +19,18 @@ export default function GithubStats() {
             rel="noopener"
             className={`${styles.link} mono`}
           >
-            github.com/Mohammadhasan14 ↗
+            github.com/Mohammadhasan14
+            <ExternalLink size={13} strokeWidth={2.5} />
           </a>
         </Reveal>
-        <Reveal className={styles.grid}>
-          {ghStats.map((st) => (
-            <div key={st.label} className={styles.stat}>
-              <div className={styles.value}>{st.value}</div>
+        <div className={styles.grid}>
+          {ghStats.map((st, i) => (
+            <Reveal key={st.label} className={styles.stat} effect="scale" delay={i * 0.08}>
+              <AnimatedNumber value={st.value} className={styles.value} />
               <div className={`${styles.label} mono`}>{st.label}</div>
-            </div>
+            </Reveal>
           ))}
-        </Reveal>
+        </div>
       </div>
     </section>
   );

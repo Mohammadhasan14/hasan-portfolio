@@ -11,8 +11,13 @@ export default function Experience() {
           <h2 className={styles.title}>Career timeline</h2>
         </Reveal>
         <div className={styles.timeline}>
-          {jobs.map((job) => (
-            <Reveal key={job.period} className={styles.item}>
+          {jobs.map((job, i) => (
+            <Reveal
+              key={job.period}
+              className={styles.item}
+              effect="slide-right"
+              delay={i * 0.12}
+            >
               <div className={styles.dot} />
               <div className={`${styles.period} mono`}>{job.period}</div>
               <div className={styles.titleRow}>

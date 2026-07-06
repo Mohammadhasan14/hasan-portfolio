@@ -92,7 +92,17 @@
   letter-spacing: -0.03em;
   margin: 26px 0 20px;
   color: #f2f0ed;
-  animation: fadeUp 0.7s ease-out 0.12s both;
+  animation: fadeUp 0.7s ease-out 0.12s both, headingGlow 6s ease-in-out 1.5s infinite;
+}
+
+@keyframes headingGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 0 rgba(255, 77, 90, 0);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(255, 77, 90, 0.22);
+  }
 }
 
 .headingOutline {
@@ -158,6 +168,43 @@
   }
 }
 
+.btnPrimary,
+.btnSecondary {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btnPrimary::before,
+.btnSecondary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.7s ease;
+  pointer-events: none;
+}
+
+.btnPrimary:hover::before,
+.btnSecondary:hover::before {
+  left: 130%;
+}
+
+.btnPrimary svg,
+.btnSecondary svg {
+  transition: transform 0.25s ease;
+}
+
+.btnPrimary:hover svg {
+  transform: translateX(4px);
+}
+
 .btnPrimary {
   font-size: 13px;
   letter-spacing: 0.1em;
@@ -174,6 +221,10 @@
   box-shadow: 0 8px 28px rgba(255, 77, 90, 0.35);
 }
 
+.btnPrimary:active {
+  transform: translateY(-1px) scale(0.97);
+}
+
 .btnSecondary {
   font-size: 13px;
   letter-spacing: 0.1em;
@@ -181,12 +232,16 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 15px 30px;
   text-decoration: none;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
 .btnSecondary:hover {
   border-color: var(--ac, #ff4d5a);
   background: rgba(255, 77, 90, 0.06);
+}
+
+.btnSecondary:active {
+  transform: scale(0.97);
 }
 
 .scrollHint {

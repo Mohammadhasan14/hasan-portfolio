@@ -11,6 +11,11 @@
   background: rgba(10, 10, 14, 0.82);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: top 0.35s ease;
+}
+
+.nav[data-hidden="true"] {
+  top: -96px;
 }
 
 .logo {
@@ -34,6 +39,7 @@
 }
 
 .navLink {
+  position: relative;
   font-size: 12px;
   color: #8a8a93;
   text-decoration: none;
@@ -43,6 +49,20 @@
 
 .navLink:hover {
   color: #e8e6e3;
+}
+
+.navLink[data-active="true"] {
+  color: #e8e6e3;
+}
+
+.underline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--ac, #ff4d5a);
 }
 
 .contactLink {

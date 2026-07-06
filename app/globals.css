@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   margin: 0;
@@ -28,6 +32,10 @@ body {
 
 .mono {
   font-family: var(--font-ibm-plex-mono), monospace;
+}
+
+section[id] {
+  scroll-margin-top: 90px;
 }
 
 @keyframes fadeUp {
@@ -86,5 +94,19 @@ body {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }

@@ -42,11 +42,24 @@
 .card:hover {
   border-color: rgba(255, 77, 90, 0.55);
   transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 77, 90, 0.3),
+    0 0 40px rgba(255, 77, 90, 0.12);
 }
 
 .shot {
   height: 190px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.shot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: repeating-linear-gradient(
     -45deg,
     rgba(255, 255, 255, 0.035) 0px,
@@ -54,14 +67,15 @@
     transparent 8px,
     transparent 16px
   );
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  transition: transform 0.6s ease;
+}
+
+.card:hover .shot::before {
+  transform: scale(1.12);
 }
 
 .shotLabel {
+  position: relative;
   font-size: 11px;
   color: #55555e;
   letter-spacing: 0.1em;
@@ -127,16 +141,27 @@
   margin-top: 20px;
 }
 
-.live {
+.live,
+.source {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-size: 12px;
-  color: var(--ac, #ff4d5a);
   letter-spacing: 0.08em;
+  transition: gap 0.2s ease;
+}
+
+.live {
+  color: var(--ac, #ff4d5a);
 }
 
 .source {
-  font-size: 12px;
   color: #8a8a93;
-  letter-spacing: 0.08em;
+}
+
+.live:hover,
+.source:hover {
+  gap: 8px;
 }
 
 .moreCard {
@@ -157,9 +182,17 @@
 }
 
 .moreTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 13px;
   color: var(--ac, #ff4d5a);
   letter-spacing: 0.12em;
+  transition: gap 0.25s ease;
+}
+
+.moreCard:hover .moreTitle {
+  gap: 12px;
 }
 
 .moreSub {

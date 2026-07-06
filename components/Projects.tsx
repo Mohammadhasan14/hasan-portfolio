@@ -1,3 +1,4 @@
+import { ExternalLink, ArrowRight, GitFork } from "lucide-react";
 import Reveal from "./Reveal";
 import { projects } from "@/lib/data";
 import styles from "./Projects.module.css";
@@ -11,8 +12,13 @@ export default function Projects() {
           <h2 className={styles.title}>Featured projects</h2>
         </Reveal>
         <div className={styles.grid}>
-          {projects.map((proj) => (
-            <Reveal key={proj.id} className={styles.card}>
+          {projects.map((proj, i) => (
+            <Reveal
+              key={proj.id}
+              className={styles.card}
+              effect="blur"
+              delay={i * 0.1}
+            >
               <div className={styles.shot}>
                 <span className={`${styles.shotLabel} mono`}>[ {proj.shot} ]</span>
                 <div className={`${styles.statusBadge} mono`}>{proj.status}</div>
@@ -31,8 +37,14 @@ export default function Projects() {
                   ))}
                 </div>
                 <div className={styles.linkRow}>
-                  <span className={`${styles.live} mono`}>LIVE ↗</span>
-                  <span className={`${styles.source} mono`}>SOURCE ↗</span>
+                  <span className={`${styles.live} mono`}>
+                    LIVE
+                    <ExternalLink size={12} strokeWidth={2.5} />
+                  </span>
+                  <span className={`${styles.source} mono`}>
+                    SOURCE
+                    <ExternalLink size={12} strokeWidth={2.5} />
+                  </span>
                 </div>
               </div>
             </Reveal>
@@ -43,8 +55,14 @@ export default function Projects() {
             target="_blank"
             rel="noopener"
             className={styles.moreCard}
+            effect="blur"
+            delay={projects.length * 0.1}
           >
-            <span className={`${styles.moreTitle} mono`}>MORE ON GITHUB →</span>
+            <span className={`${styles.moreTitle} mono`}>
+              <GitFork size={16} strokeWidth={2} />
+              MORE ON GITHUB
+              <ArrowRight size={15} strokeWidth={2.5} />
+            </span>
             <span className={`${styles.moreSub} mono`}>github.com/Mohammadhasan14</span>
           </Reveal>
         </div>

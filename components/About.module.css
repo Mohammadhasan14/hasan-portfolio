@@ -40,6 +40,11 @@
   border: 1px dashed rgba(255, 77, 90, 0.4);
   border-radius: 50%;
   animation: ringSpin 24s linear infinite;
+  transition: border-color 0.3s ease;
+}
+
+.photoWrap:hover .photoRing {
+  border-color: rgba(255, 77, 90, 0.75);
 }
 
 @keyframes ringSpin {
@@ -111,6 +116,13 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   padding: 5px 10px;
   background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.tag:hover {
+  border-color: rgba(255, 77, 90, 0.5);
+  color: #e8e6e3;
+  transform: translateY(-2px);
 }
 
 .statGrid {
@@ -125,6 +137,12 @@
 .stat {
   background: #0d0d12;
   padding: 22px 20px;
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.stat:hover {
+  background: #101017;
+  box-shadow: inset 0 0 0 1px rgba(255, 77, 90, 0.3), 0 0 24px rgba(255, 77, 90, 0.08);
 }
 
 .statValue {
