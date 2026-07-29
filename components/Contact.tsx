@@ -7,7 +7,7 @@ import { Mail, Phone, MapPin, GitFork, Briefcase, FileDown, Check } from "lucide
 import Reveal from "./Reveal";
 import styles from "./Contact.module.css";
 
-const EMAIL = "mohdhasan7867214@gmail.com";
+const EMAIL = "mhasanabbas.me@gmail.com";
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
