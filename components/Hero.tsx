@@ -13,7 +13,7 @@ import TypingText from "./TypingText";
 import ScrollIndicator from "./ScrollIndicator";
 import styles from "./Hero.module.css";
 
-export default function Hero() {
+export default function Hero({ lead }: { lead: string }) {
   const reduceMotion = useReducedMotion();
   const mvX = useMotionValue(0);
   const mvY = useMotionValue(0);
@@ -65,12 +65,7 @@ export default function Hero() {
           <span className={styles.prompt}>&gt;_</span> <TypingText />
           <span className={styles.cursorBlink} />
         </div>
-        <p className={styles.lead}>
-          I design and build scalable SaaS, eCommerce, and real-time systems on the MERN
-          stack — 14+ production apps shipped over 4+ years, including Shopify public
-          apps and Play Store releases. Available for custom builds. Based in Nagpur,
-          India.
-        </p>
+        <p className={styles.lead}>{lead}</p>
         <div className={styles.ctaRow}>
           <a href="#projects" className={`${styles.btnPrimary} mono`}>
             VIEW WORK

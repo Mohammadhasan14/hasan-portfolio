@@ -1,8 +1,10 @@
 import Reveal from "./Reveal";
-import { skillGroups } from "@/lib/data";
+import { getSkillGroups } from "@/lib/queries/skill-groups";
 import styles from "./Skills.module.css";
 
-export default function Skills() {
+export default async function Skills() {
+  const skillGroups = await getSkillGroups();
+
   return (
     <section id="skills" className={styles.section}>
       <div className={styles.inner}>
@@ -12,7 +14,7 @@ export default function Skills() {
         </Reveal>
         <div className={styles.grid}>
           {skillGroups.map((grp) => (
-            <Reveal key={grp.tag} className={styles.card}>
+            <Reveal key={grp.id} className={styles.card}>
               <div className={styles.cardCorner} />
               <div className={`${styles.cardTag} mono`}>{grp.tag}</div>
               <div className={styles.cardName}>{grp.name}</div>

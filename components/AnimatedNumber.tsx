@@ -18,16 +18,16 @@ export default function AnimatedNumber({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.4 });
   const reduceMotion = useReducedMotion();
+  // Starts at the real value (not 0) so SSR/no-JS/reduced-motion output is
+  // the true number — the count-up animation below overwrites it visually
+  // once in view, but never regresses what search crawlers or a static
+  // render see.
   const [display, setDisplay] = useState(
-    numeric === null ? value : (0).toFixed(decimals)
+    numeric === null ? value : numeric.toFixed(decimals)
   );
 
   useEffect(() => {
-    if (!inView || numeric === null) return;
-    if (reduceMotion) {
-      setDisplay(numeric.toFixed(decimals));
-      return;
-    }
+    if (!inView || numeric === null || reduceMotion) return;
     const controls = animate(0, numeric, {
       duration: 1.4,
       ease: [0.16, 1, 0.3, 1],

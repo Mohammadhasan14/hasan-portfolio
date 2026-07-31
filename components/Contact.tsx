@@ -7,20 +7,34 @@ import { Mail, Phone, MapPin, GitFork, Briefcase, FileDown, Check } from "lucide
 import Reveal from "./Reveal";
 import styles from "./Contact.module.css";
 
-const EMAIL = "mhasanabbas.me@gmail.com";
+type ContactProps = {
+  email: string;
+  phone: string;
+  location: string;
+  githubUrl: string;
+  linkedinUrl: string;
+  resumeUrl: string;
+};
 
-export default function Contact() {
+export default function Contact({
+  email,
+  phone,
+  location,
+  githubUrl,
+  linkedinUrl,
+  resumeUrl,
+}: ContactProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = async (e: MouseEvent<HTMLAnchorElement>) => {
     if (!navigator.clipboard) return;
     e.preventDefault();
     try {
-      await navigator.clipboard.writeText(EMAIL);
+      await navigator.clipboard.writeText(email);
       setCopied(true);
       setTimeout(() => setCopied(false), 2200);
     } catch {
-      window.location.href = `mailto:${EMAIL}`;
+      window.location.href = `mailto:${email}`;
     }
   };
 
@@ -33,41 +47,31 @@ export default function Contact() {
         <p className={styles.lead}>
           Have a project, a role, or just want to talk shop? My inbox is always open.
         </p>
-        <a href={`mailto:${EMAIL}`} onClick={handleCopyEmail} className={`${styles.emailBtn} mono`}>
+        <a href={`mailto:${email}`} onClick={handleCopyEmail} className={`${styles.emailBtn} mono`}>
           <Mail size={16} strokeWidth={2.25} />
-          {EMAIL}
+          {email}
         </a>
         <div className={`${styles.infoRow} mono`}>
           <span className={styles.infoItem}>
             <Phone size={13} strokeWidth={2.25} />
-            +91 72180 74913
+            {phone}
           </span>
           <span className={styles.sep}>/</span>
           <span className={styles.infoItem}>
             <MapPin size={13} strokeWidth={2.25} />
-            NAGPUR, INDIA
+            {location}
           </span>
         </div>
         <div className={styles.socialRow}>
-          <a
-            href="https://github.com/Mohammadhasan14"
-            target="_blank"
-            rel="noopener"
-            className={`${styles.social} mono`}
-          >
+          <a href={githubUrl} target="_blank" rel="noopener" className={`${styles.social} mono`}>
             <GitFork size={15} strokeWidth={2.25} />
             GITHUB
           </a>
-          <a
-            href="https://linkedin.com/in/mohammad-hasan-abbas"
-            target="_blank"
-            rel="noopener"
-            className={`${styles.social} mono`}
-          >
+          <a href={linkedinUrl} target="_blank" rel="noopener" className={`${styles.social} mono`}>
             <Briefcase size={15} strokeWidth={2.25} />
             LINKEDIN
           </a>
-          <a href="/resume.pdf" target="_blank" className={`${styles.social} mono`}>
+          <a href={resumeUrl} target="_blank" className={`${styles.social} mono`}>
             <FileDown size={15} strokeWidth={2.25} />
             RESUME.PDF
           </a>

@@ -1,9 +1,14 @@
 import { ExternalLink, ArrowRight, GitFork } from "lucide-react";
 import Reveal from "./Reveal";
-import { projects } from "@/lib/data";
+import { getProjects } from "@/lib/queries/projects";
+import { getSiteSettings } from "@/lib/queries/site-settings";
 import styles from "./Projects.module.css";
 
-export default function Projects() {
+export default async function Projects() {
+  const [projects, settings] = await Promise.all([getProjects(), getSiteSettings()]);
+  const githubUrl = settings?.github_url ?? "";
+  const githubLabel = githubUrl.replace(/^https?:\/\//, "");
+
   return (
     <section id="projects" className={styles.section}>
       <div className={styles.inner}>
@@ -20,15 +25,15 @@ export default function Projects() {
               delay={i * 0.1}
             >
               <div className={styles.shot}>
-                <span className={`${styles.shotLabel} mono`}>[ {proj.shot} ]</span>
-                <div className={`${styles.statusBadge} mono`}>{proj.status}</div>
+                <span className={`${styles.shotLabel} mono`}>[ {proj.shot_label} ]</span>
+                <div className={`${styles.statusBadge} mono`}>{proj.status_label}</div>
               </div>
               <div className={styles.body}>
                 <div className={styles.headRow}>
                   <span className={styles.name}>{proj.name}</span>
-                  <span className={`${styles.id} mono`}>{proj.id}</span>
+                  <span className={`${styles.id} mono`}>{proj.code}</span>
                 </div>
-                <p className={styles.desc}>{proj.desc}</p>
+                <p className={styles.desc}>{proj.description}</p>
                 <div className={styles.stackRow}>
                   {proj.stack.map((t) => (
                     <span key={t} className={`${styles.stackItem} mono`}>
@@ -51,7 +56,7 @@ export default function Projects() {
           ))}
           <Reveal
             as="a"
-            href="https://github.com/Mohammadhasan14"
+            href={githubUrl}
             target="_blank"
             rel="noopener"
             className={styles.moreCard}
@@ -63,7 +68,7 @@ export default function Projects() {
               MORE ON GITHUB
               <ArrowRight size={15} strokeWidth={2.5} />
             </span>
-            <span className={`${styles.moreSub} mono`}>github.com/Mohammadhasan14</span>
+            <span className={`${styles.moreSub} mono`}>{githubLabel}</span>
           </Reveal>
         </div>
       </div>

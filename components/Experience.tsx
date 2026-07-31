@@ -1,8 +1,10 @@
 import Reveal from "./Reveal";
-import { jobs } from "@/lib/data";
+import { getExperiences } from "@/lib/queries/experiences";
 import styles from "./Experience.module.css";
 
-export default function Experience() {
+export default async function Experience() {
+  const jobs = await getExperiences();
+
   return (
     <section id="experience" className={styles.section}>
       <div className={styles.inner}>
@@ -13,7 +15,7 @@ export default function Experience() {
         <div className={styles.timeline}>
           {jobs.map((job, i) => (
             <Reveal
-              key={job.period}
+              key={job.id}
               className={styles.item}
               effect="slide-right"
               delay={i * 0.12}
@@ -24,7 +26,7 @@ export default function Experience() {
                 <span className={styles.role}>{job.role}</span>
                 <span className={`${styles.company} mono`}>@ {job.company}</span>
               </div>
-              <p className={styles.desc}>{job.desc}</p>
+              <p className={styles.desc}>{job.description}</p>
             </Reveal>
           ))}
         </div>
