@@ -81,6 +81,14 @@
   letter-spacing: 0.1em;
 }
 
+.shotWithImage::before {
+  display: none;
+}
+
+.shotImage {
+  object-fit: cover;
+}
+
 .statusBadge {
   position: absolute;
   top: 12px;

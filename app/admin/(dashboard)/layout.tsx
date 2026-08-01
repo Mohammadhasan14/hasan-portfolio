@@ -1,5 +1,16 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { getSession, clearSession } from "@/lib/auth/session";
+
+const NAV_ITEMS = [
+  { href: "/admin", label: "Overview" },
+  { href: "/admin/settings", label: "Site Settings" },
+  { href: "/admin/projects", label: "Projects" },
+  { href: "/admin/experience", label: "Experience" },
+  { href: "/admin/skills", label: "Skills" },
+  { href: "/admin/stats", label: "Stats" },
+  { href: "/admin/testimonials", label: "Testimonials" },
+];
 
 async function logoutAction() {
   "use server";
@@ -19,7 +30,7 @@ export default async function AdminDashboardLayout({
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
-      <header className="flex items-center justify-between border-b border-neutral-800 px-6 py-4">
+      <header className="flex items-center justify-between border-b border-neutral-800 px-4 py-4 sm:px-6">
         <div>
           <p className="mono text-xs uppercase tracking-widest text-neutral-500">Admin</p>
           <p className="text-sm text-neutral-300">{session.email}</p>
@@ -33,7 +44,18 @@ export default async function AdminDashboardLayout({
           </button>
         </form>
       </header>
-      <main className="p-6">{children}</main>
+      <nav className="flex flex-wrap gap-1 border-b border-neutral-800 px-3 py-2 sm:px-6">
+        {NAV_ITEMS.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="rounded-md px-3 py-1.5 text-xs uppercase tracking-wide text-neutral-400 transition hover:bg-neutral-900 hover:text-neutral-100"
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+      <main className="p-4 sm:p-6">{children}</main>
     </div>
   );
 }

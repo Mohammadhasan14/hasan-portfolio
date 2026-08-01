@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ExternalLink, ArrowRight, GitFork } from "lucide-react";
 import Reveal from "./Reveal";
 import { getProjects } from "@/lib/queries/projects";
@@ -24,8 +25,18 @@ export default async function Projects() {
               effect="blur"
               delay={i * 0.1}
             >
-              <div className={styles.shot}>
-                <span className={`${styles.shotLabel} mono`}>[ {proj.shot_label} ]</span>
+              <div className={`${styles.shot} ${proj.screenshot_url ? styles.shotWithImage : ""}`}>
+                {proj.screenshot_url ? (
+                  <Image
+                    src={proj.screenshot_url}
+                    alt={`${proj.name} screenshot`}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className={styles.shotImage}
+                  />
+                ) : (
+                  <span className={`${styles.shotLabel} mono`}>[ {proj.shot_label} ]</span>
+                )}
                 <div className={`${styles.statusBadge} mono`}>{proj.status_label}</div>
               </div>
               <div className={styles.body}>
