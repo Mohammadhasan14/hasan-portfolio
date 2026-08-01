@@ -13,11 +13,11 @@ export default async function AdminProjectsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-lg font-semibold text-neutral-100">Projects</h1>
         <Link
           href="/admin/projects/new"
-          className="rounded-md bg-[#ff4d5a] px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-white transition hover:opacity-90"
+          className="rounded-md bg-[#ff4d5a] px-3 py-2 text-xs font-medium uppercase tracking-wide text-white transition hover:opacity-90"
         >
           New Project
         </Link>
@@ -48,14 +48,14 @@ export default async function AdminProjectsPage() {
             <div className="flex shrink-0 gap-2">
               <Link
                 href={`/admin/projects/${proj.id}/edit`}
-                className="rounded-md border border-neutral-700 px-3 py-1.5 text-xs uppercase tracking-wide text-neutral-300 transition hover:border-neutral-500"
+                className="flex-1 rounded-md border border-neutral-700 px-3 py-2 text-center text-xs uppercase tracking-wide text-neutral-300 transition hover:border-neutral-500 sm:flex-none"
               >
                 Edit
               </Link>
-              <form action={deleteProject.bind(null, proj.id)}>
+              <form action={deleteProject.bind(null, proj.id)} className="flex-1 sm:flex-none">
                 <button
                   type="submit"
-                  className="rounded-md border border-red-900 px-3 py-1.5 text-xs uppercase tracking-wide text-red-400 transition hover:border-red-500"
+                  className="w-full rounded-md border border-red-900 px-3 py-2 text-xs uppercase tracking-wide text-red-400 transition hover:border-red-500"
                 >
                   Delete
                 </button>

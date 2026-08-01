@@ -5,7 +5,7 @@ import type { ProjectRow } from "@/lib/supabase/types";
 import type { ProjectFormState } from "./actions";
 
 const inputClass =
-  "w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 outline-none focus:border-[#ff4d5a]";
+  "w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2.5 text-base text-neutral-100 outline-none focus:border-[#ff4d5a] sm:text-sm";
 const labelClass = "text-xs uppercase tracking-wide text-neutral-400";
 
 type ProjectFormAction = (prevState: ProjectFormState, formData: FormData) => Promise<ProjectFormState>;
@@ -70,7 +70,7 @@ export default function ProjectForm({
           <img
             src={project.screenshot_url}
             alt=""
-            className="h-24 w-auto rounded-md border border-neutral-800 object-cover"
+            className="h-24 w-auto max-w-full rounded-md border border-neutral-800 object-cover"
           />
         )}
         <input
@@ -78,7 +78,7 @@ export default function ProjectForm({
           name="screenshot"
           type="file"
           accept="image/png,image/jpeg,image/webp"
-          className="text-sm text-neutral-300 file:mr-3 file:rounded-md file:border-0 file:bg-neutral-800 file:px-3 file:py-1.5 file:text-xs file:uppercase file:tracking-wide file:text-neutral-200"
+          className="w-full text-sm text-neutral-300 file:mr-3 file:rounded-md file:border-0 file:bg-neutral-800 file:px-3 file:py-2 file:text-xs file:uppercase file:tracking-wide file:text-neutral-200"
         />
       </div>
 
@@ -87,7 +87,7 @@ export default function ProjectForm({
       <button
         type="submit"
         disabled={isPending}
-        className="self-start rounded-md bg-[#ff4d5a] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
+        className="w-full rounded-md bg-[#ff4d5a] px-4 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50 sm:w-auto sm:self-start"
       >
         {isPending ? "Saving..." : "Save"}
       </button>

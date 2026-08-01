@@ -7,7 +7,7 @@ import type { SiteSettingsRow } from "@/lib/supabase/types";
 const initialState: SettingsState = { error: null, success: false };
 
 const inputClass =
-  "w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2 text-sm text-neutral-100 outline-none focus:border-[#ff4d5a]";
+  "w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2.5 text-base text-neutral-100 outline-none focus:border-[#ff4d5a] sm:text-sm";
 const labelClass = "text-xs uppercase tracking-wide text-neutral-400";
 
 export default function SettingsForm({ settings }: { settings: SiteSettingsRow | null }) {
@@ -45,7 +45,7 @@ export default function SettingsForm({ settings }: { settings: SiteSettingsRow |
       <button
         type="submit"
         disabled={isPending}
-        className="self-start rounded-md bg-[#ff4d5a] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
+        className="w-full rounded-md bg-[#ff4d5a] px-4 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50 sm:w-auto sm:self-start"
       >
         {isPending ? "Saving..." : "Save changes"}
       </button>
