@@ -55,7 +55,7 @@ export async function createProject(
 
   revalidatePath("/");
   revalidatePath("/admin/projects");
-  redirect("/admin/projects");
+  redirect(`/admin/projects?saved=${encodeURIComponent(parsed.data.name)}`);
 }
 
 export async function updateProject(
@@ -95,10 +95,10 @@ export async function updateProject(
 
   revalidatePath("/");
   revalidatePath("/admin/projects");
-  redirect("/admin/projects");
+  redirect(`/admin/projects?saved=${encodeURIComponent(parsed.data.name)}`);
 }
 
-export async function deleteProject(id: string) {
+export async function deleteProject(id: string, name: string) {
   const session = await getSession();
   if (!session) return;
 
@@ -107,4 +107,5 @@ export async function deleteProject(id: string) {
 
   revalidatePath("/");
   revalidatePath("/admin/projects");
+  redirect(`/admin/projects?saved=${encodeURIComponent(`${name} deleted`)}`);
 }

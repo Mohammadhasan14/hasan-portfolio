@@ -12,10 +12,7 @@ export default async function EditProjectPage({ params }: { params: Promise<{ id
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="text-lg font-semibold text-neutral-100">Edit Project</h1>
-      <div className="mt-6">
-        <ProjectForm project={project} action={updateProject.bind(null, id)} />
-      </div>
+      <ProjectForm project={project} action={updateProject.bind(null, id)} />
     </div>
   );
 }

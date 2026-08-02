@@ -1,1 +1,26 @@
 @import "tailwindcss";
+
+@theme {
+  --color-admin-bg: #0a0a0b;
+  --color-admin-surface: #141416;
+  --color-admin-field: #0e0e11;
+  --color-admin-border: #26262a;
+  --color-admin-text: #eaeaea;
+  --color-admin-muted: #9b9ba1;
+  --color-admin-faint: #86868e;
+  --color-admin-accent: #ff4d5a;
+  --color-admin-accent-press: #e64753;
+  --color-admin-success: #3fb950;
+
+  --font-admin-display: var(--font-space-grotesk), sans-serif;
+  --font-admin-mono: var(--font-ibm-plex-mono), monospace;
+  --font-admin-body: var(--font-geist), system-ui, sans-serif;
+}
+
+@layer base {
+  .admin-root {
+    font-family: var(--font-admin-body);
+    background: var(--color-admin-bg);
+    color: var(--color-admin-text);
+  }
+}

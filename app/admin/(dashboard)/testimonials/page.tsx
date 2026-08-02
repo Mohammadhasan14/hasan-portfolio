@@ -49,7 +49,7 @@ export default async function AdminTestimonialsPage() {
               >
                 Edit
               </Link>
-              <ConfirmDeleteButton action={deleteTestimonial.bind(null, t.id)} label="testimonial" />
+              <ConfirmDeleteButton action={deleteTestimonial.bind(null, t.id)} itemName={t.author_name} />
             </div>
           </div>
         ))}

@@ -49,7 +49,7 @@ export default async function AdminStatsPage() {
               >
                 Edit
               </Link>
-              <ConfirmDeleteButton action={deleteStat.bind(null, stat.id)} label="stat" />
+              <ConfirmDeleteButton action={deleteStat.bind(null, stat.id)} itemName={`${stat.value} — ${stat.label}`} />
             </div>
           </div>
         ))}

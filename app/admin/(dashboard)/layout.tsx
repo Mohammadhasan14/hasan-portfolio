@@ -29,27 +29,31 @@ export default async function AdminDashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100">
-      <header className="flex items-center justify-between gap-3 border-b border-neutral-800 px-4 py-4 sm:px-6">
+    <div className="min-h-screen bg-admin-bg text-admin-text">
+      <header className="flex items-center justify-between gap-3 border-b border-admin-border px-4 py-4 sm:px-6">
         <div className="min-w-0">
-          <p className="mono text-xs uppercase tracking-widest text-neutral-500">Admin</p>
-          <p className="truncate text-sm text-neutral-300">{session.email}</p>
+          <p className="font-admin-mono font-bold text-[15px]">
+            MH<span className="text-admin-accent">://</span>dev
+          </p>
+          <p className="truncate font-admin-mono text-[10px] uppercase tracking-wider text-admin-faint">
+            {session.email}
+          </p>
         </div>
         <form action={logoutAction} className="shrink-0">
           <button
             type="submit"
-            className="rounded-md border border-neutral-700 px-3 py-2 text-xs uppercase tracking-wide text-neutral-300 transition hover:border-[#ff4d5a] hover:text-[#ff4d5a]"
+            className="cursor-pointer rounded-md border border-admin-border px-3 py-2 font-admin-mono text-[11px] uppercase tracking-wider text-admin-muted transition hover:border-admin-accent hover:text-admin-accent"
           >
             Log out
           </button>
         </form>
       </header>
-      <nav className="flex flex-wrap gap-1 overflow-x-auto border-b border-neutral-800 px-3 py-2 sm:px-6">
+      <nav className="flex flex-wrap gap-1 overflow-x-auto border-b border-admin-border px-3 py-2 sm:px-6">
         {NAV_ITEMS.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className="shrink-0 rounded-md px-3 py-2 text-xs uppercase tracking-wide text-neutral-400 transition hover:bg-neutral-900 hover:text-neutral-100"
+            className="shrink-0 rounded-md px-3 py-2 font-admin-mono text-[11px] uppercase tracking-wider text-admin-muted transition hover:bg-admin-surface hover:text-admin-text"
           >
             {item.label}
           </Link>

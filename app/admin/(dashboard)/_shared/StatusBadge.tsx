@@ -1,8 +1,11 @@
 export default function StatusBadge({ status }: { status: string }) {
+  const isPublished = status === "published";
   return (
     <span
-      className={`rounded px-1.5 py-0.5 text-[10px] uppercase tracking-wide ${
-        status === "published" ? "bg-emerald-500/15 text-emerald-400" : "bg-neutral-700/50 text-neutral-400"
+      className={`rounded border font-admin-mono text-[9.5px] uppercase tracking-wider px-1.5 py-0.5 ${
+        isPublished
+          ? "border-admin-success/30 bg-admin-success/10 text-admin-success"
+          : "border-admin-border bg-admin-faint/10 text-admin-muted"
       }`}
     >
       {status}

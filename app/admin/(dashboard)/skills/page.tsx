@@ -46,7 +46,7 @@ export default async function AdminSkillsPage() {
               >
                 Edit
               </Link>
-              <ConfirmDeleteButton action={deleteSkillGroup.bind(null, grp.id)} label="skill group" />
+              <ConfirmDeleteButton action={deleteSkillGroup.bind(null, grp.id)} itemName={grp.name} />
             </div>
           </div>
         ))}

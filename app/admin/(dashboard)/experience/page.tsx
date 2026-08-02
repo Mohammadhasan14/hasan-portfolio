@@ -46,7 +46,7 @@ export default async function AdminExperiencePage() {
               >
                 Edit
               </Link>
-              <ConfirmDeleteButton action={deleteExperience.bind(null, exp.id)} label="entry" />
+              <ConfirmDeleteButton action={deleteExperience.bind(null, exp.id)} itemName={exp.role} />
             </div>
           </div>
         ))}

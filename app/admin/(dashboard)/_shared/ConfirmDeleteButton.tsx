@@ -1,30 +1,41 @@
 "use client";
 
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
+import ConfirmDialog from "./ConfirmDialog";
+import { dangerGhostButtonClass } from "./styles";
 
 export default function ConfirmDeleteButton({
   action,
-  label = "item",
+  itemName,
 }: {
   action: () => Promise<void>;
-  label?: string;
+  itemName: string;
 }) {
+  const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   return (
-    <button
-      type="button"
-      disabled={isPending}
-      onClick={() => {
-        if (confirm(`Delete this ${label}? This can't be undone.`)) {
-          startTransition(() => {
-            action();
+    <>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className={`${dangerGhostButtonClass} flex-1 text-center sm:flex-none sm:px-4`}
+      >
+        Delete
+      </button>
+      <ConfirmDialog
+        open={open}
+        title={`Delete ${itemName}?`}
+        description="This removes it from the public site. You can't undo this."
+        onCancel={() => setOpen(false)}
+        onConfirm={() => {
+          startTransition(async () => {
+            await action();
+            setOpen(false);
           });
-        }
-      }}
-      className="w-full cursor-pointer rounded-md border border-red-900 px-3 py-2 text-xs uppercase tracking-wide text-red-400 transition hover:border-red-500 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
-    >
-      {isPending ? "Deleting..." : "Delete"}
-    </button>
+        }}
+        pending={isPending}
+      />
+    </>
   );
 }
