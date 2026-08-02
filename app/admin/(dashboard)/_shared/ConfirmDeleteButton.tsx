@@ -22,7 +22,7 @@ export default function ConfirmDeleteButton({
           });
         }
       }}
-      className="w-full rounded-md border border-red-900 px-3 py-2 text-xs uppercase tracking-wide text-red-400 transition hover:border-red-500 disabled:opacity-50 sm:w-auto"
+      className="w-full cursor-pointer rounded-md border border-red-900 px-3 py-2 text-xs uppercase tracking-wide text-red-400 transition hover:border-red-500 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
     >
       {isPending ? "Deleting..." : "Delete"}
     </button>
