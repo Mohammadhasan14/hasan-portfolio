@@ -3,18 +3,36 @@
 import { useActionState } from "react";
 import { updateSiteSettings, type SettingsState } from "./actions";
 import type { SiteSettingsRow } from "@/lib/supabase/types";
+import Field from "../_shared/Field";
+import { labelClass, fileInputClass, primaryButtonClass } from "../_shared/styles";
 
 const initialState: SettingsState = { error: null, success: false };
-
-const inputClass =
-  "w-full rounded-md border border-neutral-700 bg-neutral-900 px-3 py-2.5 text-base text-neutral-100 outline-none focus:border-[#ff4d5a] sm:text-sm";
-const labelClass = "text-xs uppercase tracking-wide text-neutral-400";
 
 export default function SettingsForm({ settings }: { settings: SiteSettingsRow | null }) {
   const [state, formAction, isPending] = useActionState(updateSiteSettings, initialState);
 
   return (
     <form action={formAction} className="flex flex-col gap-5">
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="profile_image" className={labelClass}>
+          Profile photo (PNG/JPEG/WebP, up to 5MB)
+        </label>
+        {settings?.profile_image_url && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={settings.profile_image_url}
+            alt=""
+            className="h-20 w-20 rounded-full border border-neutral-800 object-cover"
+          />
+        )}
+        <input
+          id="profile_image"
+          name="profile_image"
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+          className={fileInputClass}
+        />
+      </div>
       <Field label="Hero lead paragraph" name="hero_lead" defaultValue={settings?.hero_lead} textarea />
       <Field label="About bio" name="about_bio" defaultValue={settings?.about_bio} textarea />
       <Field
@@ -42,54 +60,9 @@ export default function SettingsForm({ settings }: { settings: SiteSettingsRow |
       {state.error && <p className="text-sm text-red-400">{state.error}</p>}
       {state.success && <p className="text-sm text-emerald-400">Saved.</p>}
 
-      <button
-        type="submit"
-        disabled={isPending}
-        className="w-full rounded-md bg-[#ff4d5a] px-4 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50 sm:w-auto sm:self-start"
-      >
+      <button type="submit" disabled={isPending} className={primaryButtonClass}>
         {isPending ? "Saving..." : "Save changes"}
       </button>
     </form>
-  );
-}
-
-function Field({
-  label,
-  name,
-  defaultValue,
-  type = "text",
-  textarea = false,
-}: {
-  label: string;
-  name: string;
-  defaultValue?: string | null;
-  type?: string;
-  textarea?: boolean;
-}) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      <label htmlFor={name} className={labelClass}>
-        {label}
-      </label>
-      {textarea ? (
-        <textarea
-          id={name}
-          name={name}
-          defaultValue={defaultValue ?? ""}
-          rows={3}
-          required
-          className={inputClass}
-        />
-      ) : (
-        <input
-          id={name}
-          name={name}
-          type={type}
-          defaultValue={defaultValue ?? ""}
-          required
-          className={inputClass}
-        />
-      )}
-    </div>
   );
 }

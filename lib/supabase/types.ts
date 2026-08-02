@@ -22,11 +22,12 @@ export type SiteSettingsRow = {
   github_url: string;
   linkedin_url: string;
   resume_url: string;
+  profile_image_url: string | null;
   updated_at: string;
 };
 
-type SiteSettingsInsert = Omit<SiteSettingsRow, "id" | "updated_at"> &
-  Partial<Pick<SiteSettingsRow, "id" | "updated_at">>;
+type SiteSettingsInsert = Omit<SiteSettingsRow, "id" | "updated_at" | "profile_image_url"> &
+  Partial<Pick<SiteSettingsRow, "id" | "updated_at" | "profile_image_url">>;
 
 export type StatRow = {
   id: string;

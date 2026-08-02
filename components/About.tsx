@@ -18,7 +18,7 @@ export default async function About() {
             <div className={styles.photoRing} />
             <div className={styles.photoInner}>
               <Image
-                src="/images/hasan_profile.png"
+                src={settings?.profile_image_url || "/images/hasan_profile.png"}
                 alt="Mohammad Hasan Abbas"
                 fill
                 sizes="164px"

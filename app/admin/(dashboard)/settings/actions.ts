@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/auth/session";
 import { createServiceClient } from "@/lib/supabase/service";
+import { uploadImage, validateImageFile } from "@/lib/storage";
 import { siteSettingsSchema } from "@/lib/validation/site-settings";
 
 export type SettingsState = { error: string | null; success: boolean };
@@ -39,6 +40,15 @@ export async function updateSiteSettings(
     .filter(Boolean);
 
   const supabase = createServiceClient();
+
+  let profileImageUrl: string | undefined;
+  const file = formData.get("profile_image");
+  if (file instanceof File && file.size > 0) {
+    const validationError = validateImageFile(file);
+    if (validationError) return { error: validationError, success: false };
+    profileImageUrl = await uploadImage("profile", "hasan", file);
+  }
+
   const { error } = await supabase
     .from("site_settings")
     .update({
@@ -52,6 +62,7 @@ export async function updateSiteSettings(
       github_url: parsed.data.github_url,
       linkedin_url: parsed.data.linkedin_url,
       resume_url: parsed.data.resume_url,
+      ...(profileImageUrl ? { profile_image_url: profileImageUrl } : {}),
       updated_at: new Date().toISOString(),
     })
     .eq("id", 1);
