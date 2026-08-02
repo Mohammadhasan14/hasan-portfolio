@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import NavIcon from "./NavIcon";
+import CommandSwitcher from "./CommandSwitcher";
 import { NAV_ITEMS, BOTTOM_NAV_KEYS, MORE_SHEET_KEYS, navItem, getActiveNavKey } from "./nav-items";
 
 export default function AdminShell({
@@ -19,6 +20,18 @@ export default function AdminShell({
   const active = getActiveNavKey(pathname);
   const activeLabel = navItem(active).label;
   const [moreOpen, setMoreOpen] = useState(false);
+  const [switcherOpen, setSwitcherOpen] = useState(false);
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setSwitcherOpen(true);
+      }
+    }
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <div className="min-h-screen bg-admin-bg text-admin-text md:flex">
@@ -61,24 +74,49 @@ export default function AdminShell({
 
       <div className="flex min-h-screen flex-1 flex-col">
         {/* Top bar */}
-        <header className="flex items-center justify-between border-b border-admin-border px-4 py-4 sm:px-6">
-          <Link href="/admin" className="font-admin-mono text-[15px] font-bold text-admin-text md:hidden">
-            MH<span className="text-admin-accent">://</span>dev
-          </Link>
-          <p className="font-admin-mono text-[11px] uppercase tracking-wider text-admin-muted md:hidden">
-            {activeLabel}
-          </p>
-          <p className="hidden font-admin-display text-[20px] font-semibold text-admin-text md:block">
-            {activeLabel}
-          </p>
-          <form action={logoutAction} className="hidden md:block">
+        <header className="grid grid-cols-[auto_1fr_auto] items-center gap-3 border-b border-admin-border px-4 py-3 sm:px-6 md:py-4">
+          <div>
+            <Link href="/admin" className="font-admin-mono text-[15px] font-bold text-admin-text md:hidden">
+              MH<span className="text-admin-accent">://</span>dev
+            </Link>
+            <p className="hidden font-admin-display text-[20px] font-semibold text-admin-text md:block">
+              {activeLabel}
+            </p>
+          </div>
+
+          <div className="flex justify-center md:justify-start">
+            <p className="font-admin-mono text-[11px] uppercase tracking-wider text-admin-muted md:hidden">
+              {activeLabel}
+            </p>
             <button
-              type="submit"
-              className="cursor-pointer rounded-md border border-admin-border px-3 py-2 font-admin-mono text-[11px] uppercase tracking-wider text-admin-muted transition hover:border-admin-accent hover:text-admin-accent"
+              type="button"
+              onClick={() => setSwitcherOpen(true)}
+              className="hidden h-10 w-full max-w-sm cursor-pointer items-center gap-2.5 rounded-md border border-admin-border bg-admin-field px-3 font-admin-mono text-[12.5px] text-admin-faint transition hover:border-admin-text/30 md:flex"
             >
-              Log out
+              <span className="text-admin-accent">&gt;_</span>
+              <span className="flex-1 text-left">Type a section, or &quot;new project&quot;…</span>
+              <span className="rounded border border-admin-border px-1.5 py-0.5 text-[10px]">⌘K</span>
             </button>
-          </form>
+          </div>
+
+          <div>
+            <button
+              type="button"
+              onClick={() => setSwitcherOpen(true)}
+              aria-label="Open command switcher"
+              className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-admin-border font-admin-mono text-[14px] text-admin-accent md:hidden"
+            >
+              &gt;_
+            </button>
+            <form action={logoutAction} className="hidden md:block">
+              <button
+                type="submit"
+                className="cursor-pointer rounded-md border border-admin-border px-3 py-2 font-admin-mono text-[11px] uppercase tracking-wider text-admin-muted transition hover:border-admin-accent hover:text-admin-accent"
+              >
+                Log out
+              </button>
+            </form>
+          </div>
         </header>
 
         <main className="flex-1 p-4 pb-24 sm:px-6 md:pb-6">{children}</main>
@@ -156,6 +194,8 @@ export default function AdminShell({
           </div>
         </div>
       )}
+
+      {switcherOpen && <CommandSwitcher onClose={() => setSwitcherOpen(false)} />}
     </div>
   );
 }
