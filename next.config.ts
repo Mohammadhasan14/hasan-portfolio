@@ -1,6 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Default is 1MB; our own upload validation (lib/storage.ts) allows
+  // images up to 5MB, so this needs headroom above that plus the rest of
+  // each form's text fields and multipart overhead.
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "6mb",
+    },
+  },
   images: {
     remotePatterns: [
       {
