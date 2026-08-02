@@ -12,10 +12,7 @@ export default async function EditExperiencePage({ params }: { params: Promise<{
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="text-lg font-semibold text-neutral-100">Edit Experience Entry</h1>
-      <div className="mt-6">
-        <ExperienceForm experience={experience} action={updateExperience.bind(null, id)} />
-      </div>
+      <ExperienceForm experience={experience} action={updateExperience.bind(null, id)} />
     </div>
   );
 }

@@ -1,12 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth/session";
 import { createServiceClient } from "@/lib/supabase/service";
 import { uploadImage, validateImageFile } from "@/lib/storage";
 import { siteSettingsSchema } from "@/lib/validation/site-settings";
 
-export type SettingsState = { error: string | null; success: boolean };
+export type SettingsState = { error: string | null };
 
 export async function updateSiteSettings(
   _prevState: SettingsState,
@@ -14,7 +15,7 @@ export async function updateSiteSettings(
 ): Promise<SettingsState> {
   const session = await getSession();
   if (!session) {
-    return { error: "Session expired. Please log in again.", success: false };
+    return { error: "Session expired. Please log in again." };
   }
 
   const parsed = siteSettingsSchema.safeParse({
@@ -31,7 +32,7 @@ export async function updateSiteSettings(
   });
 
   if (!parsed.success) {
-    return { error: parsed.error.issues[0]?.message ?? "Invalid input.", success: false };
+    return { error: parsed.error.issues[0]?.message ?? "Invalid input." };
   }
 
   const availableFor = parsed.data.available_for
@@ -45,7 +46,7 @@ export async function updateSiteSettings(
   const file = formData.get("profile_image");
   if (file instanceof File && file.size > 0) {
     const validationError = validateImageFile(file);
-    if (validationError) return { error: validationError, success: false };
+    if (validationError) return { error: validationError };
     profileImageUrl = await uploadImage("profile", "hasan", file);
   }
 
@@ -68,10 +69,10 @@ export async function updateSiteSettings(
     .eq("id", 1);
 
   if (error) {
-    return { error: error.message, success: false };
+    return { error: error.message };
   }
 
   revalidatePath("/");
   revalidatePath("/admin/settings");
-  return { error: null, success: true };
+  redirect("/admin/settings?saved=Site%20settings");
 }

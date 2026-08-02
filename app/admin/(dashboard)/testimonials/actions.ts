@@ -52,7 +52,7 @@ export async function createTestimonial(
 
   revalidatePath("/");
   revalidatePath("/admin/testimonials");
-  redirect("/admin/testimonials");
+  redirect(`/admin/testimonials?saved=${encodeURIComponent(parsed.data.author_name)}`);
 }
 
 export async function updateTestimonial(
@@ -90,10 +90,10 @@ export async function updateTestimonial(
 
   revalidatePath("/");
   revalidatePath("/admin/testimonials");
-  redirect("/admin/testimonials");
+  redirect(`/admin/testimonials?saved=${encodeURIComponent(parsed.data.author_name)}`);
 }
 
-export async function deleteTestimonial(id: string) {
+export async function deleteTestimonial(id: string, authorName: string) {
   const session = await getSession();
   if (!session) return;
 
@@ -102,4 +102,5 @@ export async function deleteTestimonial(id: string) {
 
   revalidatePath("/");
   revalidatePath("/admin/testimonials");
+  redirect(`/admin/testimonials?saved=${encodeURIComponent(`${authorName} deleted`)}`);
 }

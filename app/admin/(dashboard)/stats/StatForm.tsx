@@ -1,18 +1,31 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
+import Link from "next/link";
 import type { StatRow } from "@/lib/supabase/types";
 import type { StatFormState } from "./actions";
+import { deleteStat } from "./actions";
 import Field from "../_shared/Field";
-import { primaryButtonClass } from "../_shared/styles";
+import ConfirmDeleteButton from "../_shared/ConfirmDeleteButton";
+import { primaryButtonClass, secondaryButtonClass } from "../_shared/styles";
 
 type StatFormAction = (prevState: StatFormState, formData: FormData) => Promise<StatFormState>;
 
 export default function StatForm({ stat, action }: { stat?: StatRow; action: StatFormAction }) {
   const [state, formAction, isPending] = useActionState(action, { error: null });
+  const [isDirty, setIsDirty] = useState(false);
+  const itemName = stat ? `${stat.value} — ${stat.label}` : "New stat";
 
   return (
-    <form action={formAction} className="flex flex-col gap-5">
+    <form action={formAction} onChange={() => setIsDirty(true)} className="flex flex-col gap-5">
+      <div>
+        <p className="font-admin-display text-[22px] font-semibold text-admin-text">{itemName}</p>
+        <p className="mt-0.5 font-admin-mono text-[11px] text-admin-faint">
+          {isDirty ? "unsaved changes · " : ""}
+          {stat ? stat.status : "draft"}
+        </p>
+      </div>
+
       <Field
         label="Group"
         name="stat_group"
@@ -44,11 +57,25 @@ export default function StatForm({ stat, action }: { stat?: StatRow; action: Sta
         />
       </div>
 
-      {state.error && <p className="text-sm text-red-400">{state.error}</p>}
+      {state.error && <p className="text-sm text-admin-accent">{state.error}</p>}
 
-      <button type="submit" disabled={isPending} className={primaryButtonClass}>
-        {isPending ? "Saving..." : "Save"}
-      </button>
+      {stat && (
+        <div className="border-t border-admin-border pt-4">
+          <ConfirmDeleteButton
+            action={deleteStat.bind(null, stat.id, `${stat.value} — ${stat.label}`)}
+            itemName={itemName}
+          />
+        </div>
+      )}
+
+      <div className="sticky bottom-0 -mx-4 mt-2 flex gap-2 border-t border-admin-border bg-admin-bg/95 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
+        <Link href="/admin/stats" className={secondaryButtonClass}>
+          Discard
+        </Link>
+        <button type="submit" disabled={isPending} className={`${primaryButtonClass} flex-1`}>
+          {isPending ? "Saving..." : "Save changes"}
+        </button>
+      </div>
     </form>
   );
 }

@@ -38,7 +38,7 @@ export async function createExperience(
 
   revalidatePath("/");
   revalidatePath("/admin/experience");
-  redirect("/admin/experience");
+  redirect(`/admin/experience?saved=${encodeURIComponent(parsed.data.role)}`);
 }
 
 export async function updateExperience(
@@ -61,10 +61,10 @@ export async function updateExperience(
 
   revalidatePath("/");
   revalidatePath("/admin/experience");
-  redirect("/admin/experience");
+  redirect(`/admin/experience?saved=${encodeURIComponent(parsed.data.role)}`);
 }
 
-export async function deleteExperience(id: string) {
+export async function deleteExperience(id: string, role: string) {
   const session = await getSession();
   if (!session) return;
 
@@ -73,4 +73,5 @@ export async function deleteExperience(id: string) {
 
   revalidatePath("/");
   revalidatePath("/admin/experience");
+  redirect(`/admin/experience?saved=${encodeURIComponent(`${role} deleted`)}`);
 }

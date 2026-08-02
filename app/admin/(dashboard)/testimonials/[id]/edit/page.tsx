@@ -12,10 +12,7 @@ export default async function EditTestimonialPage({ params }: { params: Promise<
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="text-lg font-semibold text-neutral-100">Edit Testimonial</h1>
-      <div className="mt-6">
-        <TestimonialForm testimonial={testimonial} action={updateTestimonial.bind(null, id)} />
-      </div>
+      <TestimonialForm testimonial={testimonial} action={updateTestimonial.bind(null, id)} />
     </div>
   );
 }

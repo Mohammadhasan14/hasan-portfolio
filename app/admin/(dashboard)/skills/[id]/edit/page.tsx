@@ -12,10 +12,7 @@ export default async function EditSkillGroupPage({ params }: { params: Promise<{
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="text-lg font-semibold text-neutral-100">Edit Skill Group</h1>
-      <div className="mt-6">
-        <SkillGroupForm group={group} action={updateSkillGroup.bind(null, id)} />
-      </div>
+      <SkillGroupForm group={group} action={updateSkillGroup.bind(null, id)} />
     </div>
   );
 }

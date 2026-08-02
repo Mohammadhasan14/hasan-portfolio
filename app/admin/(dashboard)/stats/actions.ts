@@ -34,7 +34,7 @@ export async function createStat(_prevState: StatFormState, formData: FormData):
 
   revalidatePath("/");
   revalidatePath("/admin/stats");
-  redirect("/admin/stats");
+  redirect(`/admin/stats?saved=${encodeURIComponent(`${parsed.data.value} — ${parsed.data.label}`)}`);
 }
 
 export async function updateStat(
@@ -57,10 +57,10 @@ export async function updateStat(
 
   revalidatePath("/");
   revalidatePath("/admin/stats");
-  redirect("/admin/stats");
+  redirect(`/admin/stats?saved=${encodeURIComponent(`${parsed.data.value} — ${parsed.data.label}`)}`);
 }
 
-export async function deleteStat(id: string) {
+export async function deleteStat(id: string, label: string) {
   const session = await getSession();
   if (!session) return;
 
@@ -69,4 +69,5 @@ export async function deleteStat(id: string) {
 
   revalidatePath("/");
   revalidatePath("/admin/stats");
+  redirect(`/admin/stats?saved=${encodeURIComponent(`${label} deleted`)}`);
 }

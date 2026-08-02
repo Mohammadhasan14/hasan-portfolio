@@ -12,17 +12,25 @@ const SECTIONS = [
 export default function AdminDashboardPage() {
   return (
     <div>
-      <h1 className="text-lg font-semibold text-neutral-100">Welcome back</h1>
-      <p className="mt-1 text-sm text-neutral-400">Manage everything shown on the public site.</p>
+      <p className="font-admin-display text-[22px] font-semibold text-admin-text">Welcome back</p>
+      <p className="mt-1 font-admin-mono text-[11px] text-admin-faint">
+        site: <span className="text-admin-success">● live</span> · manage everything shown on the public
+        site
+      </p>
       <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {SECTIONS.map((section) => (
           <Link
             key={section.href}
             href={section.href}
-            className="rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 transition hover:border-neutral-600"
+            className="flex items-center gap-3 rounded-lg border border-admin-border bg-admin-surface p-4 transition hover:border-admin-text/30"
           >
-            <p className="text-sm font-medium text-neutral-100">{section.label}</p>
-            <p className="mt-1 text-xs text-neutral-500">{section.desc}</p>
+            <div className="min-w-0 flex-1">
+              <p className="font-admin-display text-[16px] font-semibold text-admin-text">
+                {section.label}
+              </p>
+              <p className="mt-0.5 text-[12.5px] text-admin-muted">{section.desc}</p>
+            </div>
+            <span className="font-admin-mono text-[13px] text-admin-faint">→</span>
           </Link>
         ))}
       </div>

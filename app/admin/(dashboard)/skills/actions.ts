@@ -37,7 +37,7 @@ export async function createSkillGroup(
 
   revalidatePath("/");
   revalidatePath("/admin/skills");
-  redirect("/admin/skills");
+  redirect(`/admin/skills?saved=${encodeURIComponent(parsed.data.name)}`);
 }
 
 export async function updateSkillGroup(
@@ -60,10 +60,10 @@ export async function updateSkillGroup(
 
   revalidatePath("/");
   revalidatePath("/admin/skills");
-  redirect("/admin/skills");
+  redirect(`/admin/skills?saved=${encodeURIComponent(parsed.data.name)}`);
 }
 
-export async function deleteSkillGroup(id: string) {
+export async function deleteSkillGroup(id: string, name: string) {
   const session = await getSession();
   if (!session) return;
 
@@ -72,4 +72,5 @@ export async function deleteSkillGroup(id: string) {
 
   revalidatePath("/");
   revalidatePath("/admin/skills");
+  redirect(`/admin/skills?saved=${encodeURIComponent(`${name} deleted`)}`);
 }
