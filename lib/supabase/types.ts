@@ -106,6 +106,26 @@ type TestimonialsInsert = Omit<
 > &
   Partial<Pick<TestimonialRow, "id" | "sort_order" | "status" | "created_at" | "avatar_url">>;
 
+export type ContactStatus = "new" | "contacted" | "quoted" | "won" | "lost";
+
+export type ContactSubmissionRow = {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  referrer: string | null;
+  ip_hash: string | null;
+  is_read: boolean;
+  status: ContactStatus;
+  created_at: string;
+};
+
+type ContactSubmissionsInsert = Omit<
+  ContactSubmissionRow,
+  "id" | "is_read" | "status" | "created_at"
+> &
+  Partial<Pick<ContactSubmissionRow, "id" | "is_read" | "status" | "created_at">>;
+
 export type Database = {
   public: {
     Tables: {
@@ -149,6 +169,12 @@ export type Database = {
         Row: TestimonialRow;
         Insert: TestimonialsInsert;
         Update: Partial<TestimonialsInsert>;
+        Relationships: [];
+      };
+      contact_submissions: {
+        Row: ContactSubmissionRow;
+        Insert: ContactSubmissionsInsert;
+        Update: Partial<ContactSubmissionsInsert>;
         Relationships: [];
       };
     };

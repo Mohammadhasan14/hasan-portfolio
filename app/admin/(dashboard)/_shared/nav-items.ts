@@ -5,7 +5,8 @@ export type NavKey =
   | "experience"
   | "skills"
   | "stats"
-  | "testimonials";
+  | "testimonials"
+  | "inbox";
 
 export const NAV_ITEMS: { key: NavKey; href: string; label: string }[] = [
   { key: "overview", href: "/admin", label: "Overview" },
@@ -15,11 +16,12 @@ export const NAV_ITEMS: { key: NavKey; href: string; label: string }[] = [
   { key: "skills", href: "/admin/skills", label: "Skills" },
   { key: "stats", href: "/admin/stats", label: "Stats" },
   { key: "testimonials", href: "/admin/testimonials", label: "Testimonials" },
+  { key: "inbox", href: "/admin/inbox", label: "Inbox" },
 ];
 
 // Bottom tab bar (mobile) shows only these; the rest live behind "More".
 export const BOTTOM_NAV_KEYS: NavKey[] = ["overview", "projects", "experience", "skills"];
-export const MORE_SHEET_KEYS: NavKey[] = ["settings", "stats", "testimonials"];
+export const MORE_SHEET_KEYS: NavKey[] = ["settings", "stats", "testimonials", "inbox"];
 
 export function navItem(key: NavKey) {
   const item = NAV_ITEMS.find((i) => i.key === key);

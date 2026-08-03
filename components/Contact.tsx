@@ -1,11 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import type { MouseEvent } from "react";
+import Script from "next/script";
 import { AnimatePresence, motion } from "motion/react";
-import { Mail, Phone, MapPin, GitFork, Briefcase, FileDown, Check } from "lucide-react";
+import { Mail, Phone, MapPin, GitFork, Briefcase, FileDown, Check, Send } from "lucide-react";
 import Reveal from "./Reveal";
+import { submitContactForm, type ContactFormState } from "@/lib/actions/contact";
 import styles from "./Contact.module.css";
+
+declare global {
+  interface Window {
+    turnstile?: { reset: (widgetId?: string) => void };
+  }
+}
 
 type ContactProps = {
   email: string;
@@ -16,6 +24,8 @@ type ContactProps = {
   resumeUrl: string;
 };
 
+const initialFormState: ContactFormState = { status: "idle", message: null };
+
 export default function Contact({
   email,
   phone,
@@ -25,6 +35,16 @@ export default function Contact({
   resumeUrl,
 }: ContactProps) {
   const [copied, setCopied] = useState(false);
+  const [formState, formAction, isPending] = useActionState(submitContactForm, initialFormState);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (formState.status === "idle") return;
+    window.turnstile?.reset();
+    if (formState.status === "success") {
+      formRef.current?.reset();
+    }
+  }, [formState]);
 
   const handleCopyEmail = async (e: MouseEvent<HTMLAnchorElement>) => {
     if (!navigator.clipboard) return;
@@ -40,6 +60,7 @@ export default function Contact({
 
   return (
     <section id="contact" className={styles.section}>
+      <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" async defer />
       <div className={styles.gridBg} />
       <Reveal className={styles.inner}>
         <div className={`${styles.eyebrow} mono`}>06 / CONTACT</div>
@@ -76,6 +97,64 @@ export default function Contact({
             RESUME.PDF
           </a>
         </div>
+
+        <div className={styles.formDivider}>
+          <span className={`${styles.formDividerLabel} mono`}>OR SEND A MESSAGE</span>
+        </div>
+
+        <form ref={formRef} action={formAction} className={styles.form}>
+          {/* Honeypot — hidden from real visitors, real bots often fill every field. */}
+          <input
+            type="text"
+            name="company_website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className={styles.honeypot}
+          />
+
+          <div className={styles.formRow}>
+            <div className={styles.fieldGroup}>
+              <label htmlFor="name" className={`${styles.fieldLabel} mono`}>
+                Name
+              </label>
+              <input id="name" name="name" type="text" required className={styles.fieldInput} />
+            </div>
+            <div className={styles.fieldGroup}>
+              <label htmlFor="email" className={`${styles.fieldLabel} mono`}>
+                Email
+              </label>
+              <input id="email" name="email" type="email" required className={styles.fieldInput} />
+            </div>
+          </div>
+          <div className={styles.fieldGroup}>
+            <label htmlFor="message" className={`${styles.fieldLabel} mono`}>
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows={4}
+              required
+              minLength={10}
+              className={styles.fieldTextarea}
+            />
+          </div>
+
+          <div className="cf-turnstile" data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY} />
+
+          {formState.status === "error" && (
+            <p className={`${styles.formMessage} ${styles.formMessageError} mono`}>{formState.message}</p>
+          )}
+          {formState.status === "success" && (
+            <p className={`${styles.formMessage} ${styles.formMessageSuccess} mono`}>{formState.message}</p>
+          )}
+
+          <button type="submit" disabled={isPending} className={`${styles.submitBtn} mono`}>
+            <Send size={14} strokeWidth={2.25} />
+            {isPending ? "SENDING..." : "SEND MESSAGE"}
+          </button>
+        </form>
       </Reveal>
 
       <div className={styles.toastWrap}>
